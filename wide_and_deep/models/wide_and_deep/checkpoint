@@ -1,0 +1,2 @@
+model_checkpoint_path: "w_d_keras"
+all_model_checkpoint_paths: "w_d_keras"
