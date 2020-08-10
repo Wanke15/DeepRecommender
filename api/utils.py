@@ -2,7 +2,7 @@ import codecs
 import json
 from json import JSONDecodeError
 
-from flask import request
+from flask import request, Response
 from werkzeug import http
 
 
@@ -26,3 +26,14 @@ def get_body():
 
     except JSONDecodeError:
         raise Exception("Request body is not in valid JSON format")
+
+
+class RecommendResponse(Response):
+    def __init__(self, body, status_code, jsonfy=True):
+        if body is not None:
+            if jsonfy:
+                super().__init__(json.dumps(body, ensure_ascii=False), status=status_code, mimetype='application/json')
+            else:
+                super().__init__(body, status=status_code)
+        else:
+            super().__init__(json.dumps(dict()), status=status_code, mimetype='application/json')

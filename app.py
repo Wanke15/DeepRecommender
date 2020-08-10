@@ -1,6 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask
 
-from api.utils import get_body
+from api.utils import get_body, RecommendResponse
 from api.wide_and_deep import WideAndDeepModel
 
 app = Flask("DeepRecommender")
@@ -24,9 +24,10 @@ def wide_and_deep_inference():
     try:
         result = wide_and_deep_model.predict(data)
         response = {"data": result, "msg": "success", "code": 200}
+        return RecommendResponse(response, status_code=200)
     except Exception as e:
         response = {"data": [], "msg": "{}".format(e), "code": 500}
-    return jsonify(response)
+        return RecommendResponse(response, status_code=500)
 
 
 @app.route("/wide-and-deep/adult-batch", methods=['POST'])
@@ -35,9 +36,10 @@ def wide_and_deep_inference_batch():
     try:
         result = wide_and_deep_model.bacth_predict(data)
         response = {"data": result, "msg": "success", "code": 200}
+        return RecommendResponse(response, status_code=200)
     except Exception as e:
         response = {"data": [], "msg": "{}".format(e), "code": 500}
-    return jsonify(response)
+        return RecommendResponse(response, status_code=500)
 
 
 if __name__ == '__main__':
