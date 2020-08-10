@@ -8,7 +8,7 @@ http://localhost:3723/wide-and-deep/adult
 ```
 
 - single input：
-```python
+```json
 {
   "age": 28,
   "capital_gain": 0,
@@ -27,7 +27,7 @@ http://localhost:3723/wide-and-deep/adult
 ```
 
 - single output：
-```python
+```json
 {
     "code": 200,
     "data": {
@@ -44,7 +44,7 @@ http://localhost:3723/wide-and-deep/adult-batch
 ```
 
 - batch input：
-```python
+```json
 [
   {
     "age": 25,
@@ -79,7 +79,7 @@ http://localhost:3723/wide-and-deep/adult-batch
 ]
 ```
 - batch output：
-```python
+```json
 {
     "code": 200,
     "data": [
