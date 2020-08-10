@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+service WideAndDeepGrpc {
+   rpc Predict(Adult) returns (SingleResponse) {}
+}
+
+message Adult {
+    int32 age = 1;
+    int32 capital_gain = 2;
+    int32 capital_loss = 3;
+    string education = 4;
+    int32 education_num = 5;
+    string gender = 6;
+    int32 hours_per_week = 7;
+    string marital_status = 8;
+    string native_country = 9;
+    string occupation = 10;
+    string race = 11;
+    string relationship = 12;
+    string workclass = 13;
+}
+
+message SingleResponse {
+    int32 code = 1;
+    repeated SingleResult data = 2;
+    string msg = 3;
+}
+
+message SingleResult {
+    string class = 1;
+    double prob = 2;
+}
