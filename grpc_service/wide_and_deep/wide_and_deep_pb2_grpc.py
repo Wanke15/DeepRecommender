@@ -2,6 +2,10 @@
 import pickle
 import json
 
+import logging
+logging.basicConfig(format="%(asctime)s-%(name)s-%(levelname)s-%(message)s", level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 import numpy as np
 from google.protobuf.json_format import MessageToJson
 
@@ -46,6 +50,7 @@ class WideAndDeepGrpcServicer(object):
         self.label_config = label_config
 
     def Predict(self, request, context):
+        logger.info("Request: {}".format(request))
         req_dict = json.loads(MessageToJson(request))
         # linear_inputs = np.array([[req_dict.get(col) for col in self.wide_cols]])
         linear_inputs = np.array([[req_dict.get(col, "") for col in self.wide_cols]]) # default "" for string
@@ -56,6 +61,7 @@ class WideAndDeepGrpcServicer(object):
         pred_class = self.label_config.get(1) if pred_prob > self.label_config.get(
             "threshold") else self.label_config.get(0)
         result = wide__and__deep__pb2.SingleResult(category=pred_class, prob=pred_prob)
+        logger.info("Request success!")
         return wide__and__deep__pb2.SingleResponse(code=200, data=result, msg="success")
 
 
