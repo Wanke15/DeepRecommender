@@ -26,4 +26,5 @@ def serve():
     server.wait_for_termination()
 
 
-serve()
+if __name__ == '__main__':
+    serve()

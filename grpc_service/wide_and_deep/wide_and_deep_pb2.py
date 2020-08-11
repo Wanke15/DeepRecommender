@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x13wide_and_deep.proto\"\x86\x02\n\x05\x41\x64ult\x12\x0b\n\x03\x61ge\x18\x01 \x01(\x05\x12\x13\n\x0b\x63\x61pitalGain\x18\x02 \x01(\x05\x12\x13\n\x0b\x63\x61pitalLoss\x18\x03 \x01(\x05\x12\x11\n\teducation\x18\x04 \x01(\t\x12\x14\n\x0c\x65\x64ucationNum\x18\x05 \x01(\x05\x12\x0e\n\x06gender\x18\x06 \x01(\t\x12\x14\n\x0choursPerWeek\x18\x07 \x01(\x05\x12\x15\n\rmaritalStatus\x18\x08 \x01(\t\x12\x15\n\rnativeCountry\x18\t \x01(\t\x12\x12\n\noccupation\x18\n \x01(\t\x12\x0c\n\x04race\x18\x0b \x01(\t\x12\x14\n\x0crelationship\x18\x0c \x01(\t\x12\x11\n\tworkClass\x18\r \x01(\t\"H\n\x0eSingleResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x1b\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\r.SingleResult\x12\x0b\n\x03msg\x18\x03 \x01(\t\".\n\x0cSingleResult\x12\x10\n\x08\x63\x61tegory\x18\x01 \x01(\t\x12\x0c\n\x04prob\x18\x02 \x01(\x01\x32\x37\n\x0fWideAndDeepGrpc\x12$\n\x07Predict\x12\x06.Adult\x1a\x0f.SingleResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x13wide_and_deep.proto\"\x8d\x02\n\x05\x41\x64ult\x12\x0b\n\x03\x61ge\x18\x01 \x01(\x05\x12\x14\n\x0c\x63\x61pital_gain\x18\x02 \x01(\x05\x12\x14\n\x0c\x63\x61pital_loss\x18\x03 \x01(\x05\x12\x11\n\teducation\x18\x04 \x01(\t\x12\x15\n\reducation_num\x18\x05 \x01(\x05\x12\x0e\n\x06gender\x18\x06 \x01(\t\x12\x16\n\x0ehours_per_week\x18\x07 \x01(\x05\x12\x16\n\x0emarital_status\x18\x08 \x01(\t\x12\x16\n\x0enative_country\x18\t \x01(\t\x12\x12\n\noccupation\x18\n \x01(\t\x12\x0c\n\x04race\x18\x0b \x01(\t\x12\x14\n\x0crelationship\x18\x0c \x01(\t\x12\x11\n\tworkclass\x18\r \x01(\t\"H\n\x0eSingleResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x1b\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\r.SingleResult\x12\x0b\n\x03msg\x18\x03 \x01(\t\".\n\x0cSingleResult\x12\x10\n\x08\x63\x61tegory\x18\x01 \x01(\t\x12\x0c\n\x04prob\x18\x02 \x01(\x01\x32\x37\n\x0fWideAndDeepGrpc\x12$\n\x07Predict\x12\x06.Adult\x1a\x0f.SingleResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -39,14 +39,14 @@ _ADULT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='capitalGain', full_name='Adult.capitalGain', index=1,
+      name='capital_gain', full_name='Adult.capital_gain', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='capitalLoss', full_name='Adult.capitalLoss', index=2,
+      name='capital_loss', full_name='Adult.capital_loss', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -60,7 +60,7 @@ _ADULT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='educationNum', full_name='Adult.educationNum', index=4,
+      name='education_num', full_name='Adult.education_num', index=4,
       number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -74,21 +74,21 @@ _ADULT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hoursPerWeek', full_name='Adult.hoursPerWeek', index=6,
+      name='hours_per_week', full_name='Adult.hours_per_week', index=6,
       number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='maritalStatus', full_name='Adult.maritalStatus', index=7,
+      name='marital_status', full_name='Adult.marital_status', index=7,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='nativeCountry', full_name='Adult.nativeCountry', index=8,
+      name='native_country', full_name='Adult.native_country', index=8,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -116,7 +116,7 @@ _ADULT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='workClass', full_name='Adult.workClass', index=12,
+      name='workclass', full_name='Adult.workclass', index=12,
       number=13, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -135,7 +135,7 @@ _ADULT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=24,
-  serialized_end=286,
+  serialized_end=293,
 )
 
 
@@ -179,8 +179,8 @@ _SINGLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=288,
-  serialized_end=360,
+  serialized_start=295,
+  serialized_end=367,
 )
 
 
@@ -217,8 +217,8 @@ _SINGLERESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=362,
-  serialized_end=408,
+  serialized_start=369,
+  serialized_end=415,
 )
 
 _SINGLERESPONSE.fields_by_name['data'].message_type = _SINGLERESULT
@@ -256,8 +256,8 @@ _WIDEANDDEEPGRPC = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=410,
-  serialized_end=465,
+  serialized_start=417,
+  serialized_end=472,
   methods=[
   _descriptor.MethodDescriptor(
     name='Predict',
