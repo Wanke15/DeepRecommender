@@ -52,18 +52,68 @@ def build_model(feature_dim, embedding_dim=8):
 
 
 if __name__ == '__main__':
-    fm = build_model(30, 15)
-    data = load_breast_cancer()
-    X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.2,
-                                                        random_state=27, stratify=data.target)
-    fm.fit(X_train, y_train, epochs=50, batch_size=16, validation_data=(X_test, y_test))
+    import pickle
+    import numpy as np
 
-    tf.keras.models.save_model(
-        fm,
-        './fm_keras_saved_model/1',
-        overwrite=True,
-        include_optimizer=True,
-        save_format=None,
-        signatures=None,
-        options=None
-    )
+    import tensorflow as tf
+    import pandas as pd
+    from sklearn.preprocessing import OneHotEncoder
+
+    # Define the column names for the data sets.
+    COLUMNS = ["age", "workclass", "fnlwgt", "education", "education_num",
+               "marital_status", "occupation", "relationship", "race", "gender",
+               "capital_gain", "capital_loss", "hours_per_week", "native_country", "income_bracket"]
+    LABEL_COLUMN = 'label'
+    CATEGORICAL_COLUMNS = ["workclass", "education", "marital_status", "occupation",
+                           "relationship", "race", "gender", "native_country"]
+    CONTINUOUS_COLUMNS = ["age", "education_num", "capital_gain", "capital_loss",
+                          "hours_per_week"]
+
+    train_file = "../wide_and_deep/data/adult.train"
+    test_file = "../wide_and_deep/data/adult.test"
+
+    print('Preparing data...')
+    # Read the training and test data sets into Pandas dataframe.
+    df_train = pd.read_csv(train_file, names=COLUMNS, skipinitialspace=True)
+
+    org_linear_inputs = df_train[CATEGORICAL_COLUMNS]
+
+    enc = OneHotEncoder(handle_unknown='ignore')
+    final_train_inputs = enc.fit_transform(org_linear_inputs).todense()
+
+    # final_train_inputs = np.hstack((df_train[CONTINUOUS_COLUMNS].values, linear_inputs))
+
+    # with open("./models/one_hot_encoder.b", 'wb') as f:
+    #     pickle.dump(enc, f)
+
+    # dnn_inputs = df_train[CONTINUOUS_COLUMNS]
+
+    y = df_train["income_bracket"].apply(lambda x: '>50K' in x).astype(int)
+
+    fm = build_model(final_train_inputs.shape[1], 15)
+    # data = load_breast_cancer();data.data;data.target
+    X_train, X_eval, y_train, y_eval = train_test_split(final_train_inputs, y, test_size=0.2,
+                                                        random_state=27, stratify=y)
+    fm.fit(X_train, y_train, epochs=30, batch_size=16, validation_data=(X_eval, y_eval))
+
+    #############
+    df_test = pd.read_csv(test_file, names=COLUMNS, skipinitialspace=True)
+
+    x_test_org = df_test[CATEGORICAL_COLUMNS]
+
+    final_test_inputs = enc.transform(x_test_org).todense()
+    # final_test_inputs = np.hstack((df_test[CONTINUOUS_COLUMNS].values, test_linear_inputs))
+
+    y_test = df_test["income_bracket"].apply(lambda x: '>50K' in x).astype(int)
+
+    fm.evaluate(final_test_inputs, y_test)
+
+    # tf.keras.models.save_model(
+    #     fm,
+    #     './fm_keras_saved_model/1',
+    #     overwrite=True,
+    #     include_optimizer=True,
+    #     save_format=None,
+    #     signatures=None,
+    #     options=None
+    # )
